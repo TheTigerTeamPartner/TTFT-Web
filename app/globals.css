@@ -1,0 +1,102 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* { box-sizing: border-box; padding: 0; margin: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: #191D33;
+  color: #fff;
+  font-family: 'Inter', system-ui, sans-serif;
+  overflow: hidden;
+}
+
+/* ─── Scanning light ─── */
+@keyframes scanY {
+  0%   { top: -2px;   opacity: 0; }
+  5%   { opacity: 1; }
+  45%  { opacity: 0.9; }
+  50%  { top: 100%;   opacity: 0; }
+  100% { top: -2px;   opacity: 0; }
+}
+
+.scan-line {
+  position: absolute;
+  left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255,255,255,0.15) 15%,
+    rgba(255,255,255,0.85) 45%,
+    white 50%,
+    rgba(255,255,255,0.85) 55%,
+    rgba(255,255,255,0.15) 85%,
+    transparent 100%
+  );
+  box-shadow: 0 0 8px 3px rgba(255,255,255,0.3), 0 0 20px 6px rgba(180,210,255,0.15);
+  animation: scanY 3.5s ease-in-out infinite;
+  pointer-events: none;
+  z-index: 30;
+}
+
+/* ─── Tile styles ─── */
+.tile {
+  position: absolute;
+  border-radius: 4px;
+  border: 1px solid rgba(60, 100, 220, 0.22);
+  background: linear-gradient(145deg, rgba(50,75,180,0.12) 0%, rgba(25,29,60,0.85) 100%);
+}
+
+.tile-glow {
+  border: 1px solid rgba(80, 130, 255, 0.55);
+  background: linear-gradient(145deg, rgba(70,110,255,0.22) 0%, rgba(40,60,160,0.18) 100%);
+  box-shadow:
+    0 0 20px rgba(80,130,255,0.25),
+    0 0 50px rgba(60,100,255,0.12),
+    inset 0 1px 0 rgba(120,170,255,0.15);
+}
+
+@keyframes tileFloat {
+  0%,100% { transform: translateY(0); }
+  50%     { transform: translateY(-8px); }
+}
+
+/* ─── Spotlight from top-left ─── */
+.spotlight-beam {
+  position: absolute;
+  top: 0; left: 0;
+  width: 75vw;
+  height: 75vh;
+  background: conic-gradient(
+    from 15deg at 5% 3%,
+    transparent 0deg,
+    rgba(120, 160, 255, 0.04) 6deg,
+    rgba(160, 200, 255, 0.11) 13deg,
+    rgba(120, 160, 255, 0.04) 20deg,
+    transparent 26deg
+  );
+  pointer-events: none;
+  z-index: 1;
+}
+
+.spotlight-core {
+  position: absolute;
+  top: -20px; left: -20px;
+  width: 50vw; height: 50vh;
+  background: radial-gradient(
+    ellipse 30% 40% at 8% 6%,
+    rgba(150, 190, 255, 0.12) 0%,
+    transparent 70%
+  );
+  pointer-events: none;
+  z-index: 1;
+}
+
+::-webkit-scrollbar       { width: 4px; }
+::-webkit-scrollbar-track { background: #191D33; }
+::-webkit-scrollbar-thumb { background: #F39204; border-radius: 2px; }

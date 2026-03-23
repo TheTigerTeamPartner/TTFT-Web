@@ -3,7 +3,7 @@ import Image from "next/image";
 
 /* ── Grid config ── */
 const COLS = 26;
-const ROWS = 13;
+const ROWS = 55; // enough to cover tall screens (portrait mobile)
 
 /* ── Glow tiles (col, row) on right portion ── */
 const GLOW: Set<string> = new Set([
@@ -53,8 +53,8 @@ export default function Hero() {
         className="absolute inset-0 pointer-events-none"
         style={{
           display: "grid",
-          gridTemplateColumns: `repeat(${COLS}, 1fr)`,
-          gridTemplateRows:    `repeat(${ROWS}, 1fr)`,
+          gridTemplateColumns: `repeat(${COLS}, calc(100vw / ${COLS}))`,
+          gridTemplateRows:    `repeat(${ROWS}, calc(100vw / ${COLS}))`,
           gap: "0px",
           padding: "0px",
           zIndex: 0,
@@ -94,6 +94,42 @@ export default function Hero() {
       </div>
 
 
+
+      {/* ══════════════════════════════
+          SPOTLIGHT BEAM — top-left corner
+      ══════════════════════════════ */}
+      {/* outer glow — fat oval */}
+      <div
+        className="absolute pointer-events-none"
+        style={{
+          top: "-30vh",
+          left: "-60px",
+          width: 340,
+          height: "160vh",
+          background:
+            "radial-gradient(ellipse 50% 50% at 50% 50%, rgba(16,26,80,0.85) 0%, rgba(16,26,80,0.30) 55%, transparent 80%)",
+          transformOrigin: "50% 20%",
+          filter: "blur(55px)",
+          animation: "beamSway 7s ease-in-out infinite",
+          zIndex: 2,
+        }}
+      />
+      {/* inner core — thinner oval */}
+      <div
+        className="absolute pointer-events-none"
+        style={{
+          top: "-25vh",
+          left: "-20px",
+          width: 180,
+          height: "145vh",
+          background:
+            "radial-gradient(ellipse 50% 50% at 50% 50%, rgba(16,26,80,0.60) 0%, rgba(16,26,80,0.18) 55%, transparent 78%)",
+          transformOrigin: "50% 20%",
+          filter: "blur(28px)",
+          animation: "beamSway 7s ease-in-out 0.2s infinite",
+          zIndex: 2,
+        }}
+      />
 
       {/* ══════════════════════════════
           SCAN LINES — vertical, in column grooves
@@ -143,7 +179,7 @@ export default function Hero() {
           className="flex items-center gap-2 mb-9"
           style={{ opacity: 0, animation: "fadeUp 0.6s ease-out 0.1s forwards" }}
         >
-          <span style={{ fontSize: 13 }}>✨</span>
+          <span style={{ fontSize: 13 }}> </span>
           <span style={{ color: "rgba(255,255,255,0.48)", fontSize: 13, fontWeight: 500 }}>
             Welcome to the beta version
           </span>
@@ -171,7 +207,7 @@ export default function Hero() {
         {/* Body */}
         <p
           style={{
-            color: "rgba(255,255,255,0.38)",
+            color: "rgb(255, 255, 255)",
             fontSize: 14,
             fontWeight: 400,
             lineHeight: 1.9,
@@ -185,7 +221,7 @@ export default function Hero() {
           <span style={{ color: "#F39204" }}>re-engineer</span> urban connectivity.
           {" "}The Tiger Team delivers{" "}
           <span style={{ color: "#F39204" }}>high performance</span> AI and{" "}
-          <span style={{ color: "#F39204" }}>quantum algorithms</span> to conquer
+          <span style={{ color: "#F39204" }}>Quantum algorithms</span> to conquer
           energy bottlenecks and industrial complexity.
         </p>
       </div>
@@ -201,6 +237,10 @@ export default function Hero() {
         @keyframes fadeUp {
           from { opacity: 0; transform: translateY(20px); }
           to   { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes beamSway {
+          0%,100% { transform: rotate(-30deg); opacity: 0.85; }
+          50%     { transform: rotate(-40deg); opacity: 1; }
         }
         ${SCAN_LINES.map((_, i) => `
           @keyframes scanLine${i} {

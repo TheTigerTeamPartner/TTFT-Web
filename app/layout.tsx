@@ -22,15 +22,18 @@ export const metadata: Metadata = {
     icon: "/logo-title.png",
     apple: "/logo-title.png",
   },
+  alternates: {
+    canonical: "https://www.tigerfoundationtech.co.th",
+  },
   openGraph: {
     title: "TTFT — The Tiger Team Foundation Technology",
     description:
       "Dominating the Future of Deep Tech. The Tiger Team delivers high-performance AI and Quantum algorithms to conquer energy bottlenecks and industrial complexity.",
-    url: "https://ttft.io",
+    url: "https://www.tigerfoundationtech.co.th",
     siteName: "TTFT",
     images: [
       {
-        url: "/logo.png",
+        url: "https://www.tigerfoundationtech.co.th/logo-title.png",
         width: 1200,
         height: 630,
         alt: "TTFT — The Tiger Team Foundation Technology",
@@ -43,7 +46,7 @@ export const metadata: Metadata = {
     title: "TTFT — The Tiger Team Foundation Technology",
     description:
       "Dominating the Future of Deep Tech. The Tiger Team delivers high-performance AI and Quantum algorithms to conquer energy bottlenecks and industrial complexity.",
-    images: ["/logo.png"],
+    images: ["https://www.tigerfoundationtech.co.th/logo-title.png"],
   },
 };
 
